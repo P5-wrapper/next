@@ -5,6 +5,7 @@
   "type": "module",
   "homepage": "https://github.com/P5-wrapper/next",
   "license": "MIT",
+  "types": "dist/main.d.ts",
   "files": [
     "dist"
   ],
