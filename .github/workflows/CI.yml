@@ -10,13 +10,13 @@ jobs:
   renovate-bot:
     runs-on: ubuntu-latest
     steps:
-      - uses: P5-wrapper/setup-action@v1.0.3
+      - uses: P5-wrapper/setup-action@v1.0.4
         with:
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Run format if the PR is from the Renovate bot
         if: github.actor == 'renovate[bot]'
-        run: pnpm format --if-present
+        run: pnpm --if-present format
         shell: bash
 
       - name: Commit any formatting changes
@@ -31,16 +31,16 @@ jobs:
     runs-on: ubuntu-latest
     needs: renovate-bot
     steps:
-      - uses: P5-wrapper/setup-action@v1.0.3
+      - uses: P5-wrapper/setup-action@v1.0.4
         with:
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Check formatting
-        run: pnpm format:check --if-present
+        run: pnpm --if-present format:check
 
       - name: Formatting issues detected (attempting fix...)
         if: ${{ failure() }}
-        run: pnpm format --if-present
+        run: pnpm --if-present format
 
       - name: Commit fixed formatting issues
         uses: stefanzweifel/git-auto-commit-action@v4
@@ -52,16 +52,16 @@ jobs:
     runs-on: ubuntu-latest
     needs: renovate-bot
     steps:
-      - uses: P5-wrapper/setup-action@v1.0.3
+      - uses: P5-wrapper/setup-action@v1.0.4
         with:
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Lint
-        run: pnpm lint --if-present
+        run: pnpm --if-present lint
 
       - name: Linting issues detected (attempting fix...)
         if: ${{ failure() }}
-        run: pnpm lint:fix --if-present
+        run: pnpm --if-present lint:fix
 
       - name: Commit fixed linting issues
         uses: stefanzweifel/git-auto-commit-action@v4
@@ -73,18 +73,18 @@ jobs:
     runs-on: ubuntu-latest
     needs: renovate-bot
     steps:
-      - uses: P5-wrapper/setup-action@v1.0.3
+      - uses: P5-wrapper/setup-action@v1.0.4
         with:
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Test
-        run: pnpm test --if-present
+        run: pnpm --if-present test
 
   build:
     runs-on: ubuntu-latest
     needs: renovate-bot
     steps:
-      - uses: P5-wrapper/setup-action@v1.0.3
+      - uses: P5-wrapper/setup-action@v1.0.4
         with:
           token: ${{ secrets.GH_TOKEN }}
 
