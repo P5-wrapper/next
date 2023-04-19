@@ -2,16 +2,16 @@ lockfileVersion: '6.0'
 
 dependencies:
   next:
-    specifier: ^12.3.4
+    specifier: '>= 12.3.4'
     version: 12.3.4(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)
   react:
-    specifier: ^18.2.0
+    specifier: '>= 18.2.0'
     version: 18.2.0
   react-dom:
-    specifier: ^18.2.0
+    specifier: '>= 18.2.0'
     version: 18.2.0(react@18.2.0)
   react-p5-wrapper:
-    specifier: ^4.1.1
+    specifier: '>= 4.1.1'
     version: 4.1.1(react-dom@18.2.0)(react@18.2.0)
 
 devDependencies:
