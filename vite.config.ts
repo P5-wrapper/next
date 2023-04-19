@@ -4,6 +4,7 @@ import {defineConfig, splitVendorChunkPlugin} from 'vite'
 import dts from 'vite-plugin-dts'
 import react from '@vitejs/plugin-react'
 
+// noinspection JSUnusedGlobalSymbols
 export default defineConfig({
   plugins: [dts(), react(), splitVendorChunkPlugin()],
   build: {
