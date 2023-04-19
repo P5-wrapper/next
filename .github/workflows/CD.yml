@@ -15,7 +15,7 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Build the demo application
-        run: pnpm build:demo --if-present
+        run: pnpm --if-present build:demo
 
 #      - name: Deploy the demo application
 #        uses: JamesIves/github-pages-deploy-action@v4
