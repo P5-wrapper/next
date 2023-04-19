@@ -1,0 +1,37 @@
+name: CD
+
+on:
+  push:
+    branches: [master]
+
+concurrency: cd-${{ github.ref }}
+
+jobs:
+  gh-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: P5-wrapper/setup-action@v1.0.3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Build the demo application
+        run: pnpm build:demo --if-present
+
+#      - name: Deploy the demo application
+#        uses: JamesIves/github-pages-deploy-action@v4
+#        with:
+#          folder: dist/demo
+
+  npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: P5-wrapper/setup-action@v1.0.3
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Build the components
+        run: pnpm build
+
+      - uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
