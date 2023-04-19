@@ -13,7 +13,7 @@
 To install the component, run the following:
 
 ```shell
-[npm|yarn|pnpm] [install|add] @p5-wrapper/next
+[npm|yarn|pnpm] [install|add] @p5-wrapper/next react-p5-wrapper
 ```
 
 ## Usage
