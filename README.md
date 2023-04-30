@@ -13,7 +13,7 @@
 To install the component, run the following:
 
 ```shell
-[npm|yarn|pnpm] [install|add] @p5-wrapper/next react-p5-wrapper
+[npm|yarn|pnpm] [install|add] @p5-wrapper/next @p5-wrapper/react
 ```
 
 ## Usage
@@ -22,7 +22,7 @@ Then to use the component in your NextJS project you can simply import like so:
 
 ```tsx
 import React from "react";
-import { type Sketch } from "react-p5-wrapper";
+import { type Sketch } from "@p5-wrapper/react";
 import { NextReactP5Wrapper } from "@p5-wrapper/next";
 
 const sketch: Sketch = p5 => {
