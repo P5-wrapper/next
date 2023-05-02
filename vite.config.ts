@@ -13,12 +13,12 @@ export default defineConfig({
       name: 'NextReactP5Wrapper',
     },
    rollupOptions: {
-      external: ['react', 'react-dom', 'react-p5-wrapper', 'next'],
+      external: ['react', 'react-dom', '@p5-wrapper/react', 'next'],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDom',
-          'react-p5-wrapper': 'ReactP5Wrapper',
+          '@p5-wrapper/react': 'ReactP5Wrapper',
           'next': 'Next'
         },
       },
