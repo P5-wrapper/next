@@ -30,7 +30,7 @@ devDependencies:
     version: 18.2.1
   '@vitejs/plugin-react':
     specifier: ^4.0.0
-    version: 4.0.0(vite@4.3.4)
+    version: 4.0.0(vite@4.3.9)
   rimraf:
     specifier: ^5.0.0
     version: 5.0.0
@@ -39,7 +39,7 @@ devDependencies:
     version: 5.0.4
   vite:
     specifier: ^4.3.4
-    version: 4.3.4(@types/node@18.16.3)
+    version: 4.3.9(@types/node@18.16.3)
   vite-plugin-dts:
     specifier: ^3.0.0
     version: 3.0.0(@types/node@18.16.3)(typescript@5.0.4)
@@ -726,7 +726,7 @@ packages:
     resolution: {integrity: sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==}
     dev: true
 
-  /@vitejs/plugin-react@4.0.0(vite@4.3.4):
+  /@vitejs/plugin-react@4.0.0(vite@4.3.9):
     resolution: {integrity: sha512-HX0XzMjL3hhOYm+0s95pb0Z7F8O81G7joUHgfDd/9J/ZZf5k4xX6QAMFkKsHFxaHlf6X7GD7+XuaZ66ULiJuhQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -736,7 +736,7 @@ packages:
       '@babel/plugin-transform-react-jsx-self': 7.21.0(@babel/core@7.21.8)
       '@babel/plugin-transform-react-jsx-source': 7.19.6(@babel/core@7.21.8)
       react-refresh: 0.14.0
-      vite: 4.3.4(@types/node@18.16.3)
+      vite: 4.3.9(@types/node@18.16.3)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -1551,7 +1551,7 @@ packages:
       vue-tsc: 1.8.3(typescript@5.0.4)
     optionalDependencies:
       rollup: 3.21.3
-      vite: 4.3.4(@types/node@18.16.3)
+      vite: 4.3.9(@types/node@18.16.3)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -1562,8 +1562,8 @@ packages:
       - terser
     dev: true
 
-  /vite@4.3.4(@types/node@18.16.3):
-    resolution: {integrity: sha512-f90aqGBoxSFxWph2b39ae2uHAxm5jFBBdnfueNxZAT1FTpM13ccFQExCaKbR2xFW5atowjleRniQ7onjJ22QEg==}
+  /vite@4.3.9(@types/node@18.16.3):
+    resolution: {integrity: sha512-qsTNZjO9NoJNW7KnOrgYwczm0WctJ8m/yqYAMAK9Lxt4SoySUfS5S8ia9K7JHpa3KEeMfyF8LoJ3c5NeBJy6pg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
