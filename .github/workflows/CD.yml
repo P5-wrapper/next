@@ -32,7 +32,7 @@ jobs:
       - name: Build the components
         run: pnpm build
 
-      - uses: JS-DevTools/npm-publish@v2
+      - uses: JS-DevTools/npm-publish@v3
         with:
           access: "public"
           token: ${{ secrets.NPM_TOKEN }}
