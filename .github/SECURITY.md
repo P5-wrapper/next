@@ -3,7 +3,7 @@
 ## Supported Versions
 
 | Version | Supported          | Supported Until    |
-|---------|--------------------|--------------------|
+| ------- | ------------------ | ------------------ |
 | > 1.0.0 | :white_check_mark: | Next major version |
 
 ## Reporting a Vulnerability

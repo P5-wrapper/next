@@ -17,10 +17,10 @@ jobs:
       - name: Build the demo application
         run: pnpm --if-present build:demo
 
-#      - name: Deploy the demo application
-#        uses: JamesIves/github-pages-deploy-action@v4
-#        with:
-#          folder: dist/demo
+  #      - name: Deploy the demo application
+  #        uses: JamesIves/github-pages-deploy-action@v4
+  #        with:
+  #          folder: dist/demo
 
   npm:
     runs-on: ubuntu-latest
