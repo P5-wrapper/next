@@ -29,7 +29,7 @@ jobs:
 
   format:
     runs-on: ubuntu-latest
-    needs: depandabot-bot
+    needs: dependabot-bot
     steps:
       - uses: P5-wrapper/setup-action@v1.0.6
         with:
