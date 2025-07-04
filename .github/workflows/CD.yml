@@ -7,22 +7,7 @@ on:
 concurrency: cd-${{ github.ref }}
 
 jobs:
-  gh-pages:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: P5-wrapper/setup-action@v1.0.6
-        with:
-          token: ${{ secrets.GH_TOKEN }}
-
-      - name: Build the demo application
-        run: pnpm --if-present build:demo
-
-  #      - name: Deploy the demo application
-  #        uses: JamesIves/github-pages-deploy-action@v4
-  #        with:
-  #          folder: dist/demo
-
-  npm:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: P5-wrapper/setup-action@v1.0.6
