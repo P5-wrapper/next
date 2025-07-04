@@ -1,12 +1,12 @@
 import { resolve } from "node:path";
 
-import { defineConfig, splitVendorChunkPlugin } from "vite";
+import { defineConfig } from "vite";
 import dts from "vite-plugin-dts";
 import react from "@vitejs/plugin-react";
 
 // noinspection JSUnusedGlobalSymbols
 export default defineConfig({
-  plugins: [dts(), react(), splitVendorChunkPlugin()],
+  plugins: [dts(), react()],
   build: {
     lib: {
       entry: resolve(__dirname, "src", "main.tsx"),
@@ -19,8 +19,8 @@ export default defineConfig({
           react: "React",
           "react-dom": "ReactDom",
           "@p5-wrapper/react": "ReactP5Wrapper",
-          next: "Next",
-        },
+          next: "Next"
+        }
       },
     },
   },
