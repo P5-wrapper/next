@@ -165,12 +165,6 @@ packages:
     cpu: [arm]
     os: [android]
 
-  '@esbuild/android-x64@0.25.5':
-    resolution: {integrity: sha512-D2GyJT1kjvO//drbRT3Hib9XPwQeWd9vZoBJn+bu/lVsOZ13cqNdDeqIF/xQ5/VmWvMduP6AmXvylO/PIc2isw==}
-    engines: {node: '>=18'}
-    cpu: [x64]
-    os: [android]
-
   '@esbuild/darwin-arm64@0.25.5':
     resolution: {integrity: sha512-GtaBgammVvdF7aPIgH2jxMDdivezgFu6iKpmT+48+F8Hhg5J/sfnDieg0aeG/jfSvkYQU2/pceFPDKlqZzwnfQ==}
     engines: {node: '>=18'}
@@ -1460,9 +1454,6 @@ snapshots:
   '@esbuild/android-arm@0.25.5':
     optional: true
 
-  '@esbuild/android-x64@0.25.5':
-    optional: true
-
   '@esbuild/darwin-arm64@0.25.5':
     optional: true
 
@@ -2025,7 +2016,6 @@ snapshots:
       '@esbuild/aix-ppc64': 0.25.5
       '@esbuild/android-arm': 0.25.5
       '@esbuild/android-arm64': 0.25.5
-      '@esbuild/android-x64': 0.25.5
       '@esbuild/darwin-arm64': 0.25.5
       '@esbuild/darwin-x64': 0.25.5
       '@esbuild/freebsd-arm64': 0.25.5
