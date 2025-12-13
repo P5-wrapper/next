@@ -19,8 +19,8 @@ export default defineConfig({
           react: "React",
           "react-dom": "ReactDom",
           "@p5-wrapper/react": "ReactP5Wrapper",
-          next: "Next"
-        }
+          next: "Next",
+        },
       },
     },
   },
