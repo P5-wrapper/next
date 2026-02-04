@@ -4,9 +4,13 @@
 
 > **Note:**
 >
-> This library simply re-exports the [@P5-wrapper/react (react-p5-wrapper) component](https://github.com/P5-wrapper/react) as a NextJS dynamic component. Nothing more.
+> This library simply re-exports the
+> [@P5-wrapper/react (react-p5-wrapper) component](https://github.com/P5-wrapper/react)
+> as a NextJS dynamic component. Nothing more.
 >
-> For more in-depth information on the base component, check the documentation via [the @P5-wrapper/react (react-p5-wrapper) docs](https://github.com/P5-wrapper/react).
+> For more in-depth information on the base component, check the documentation
+> via
+> [the @P5-wrapper/react (react-p5-wrapper) docs](https://github.com/P5-wrapper/react).
 
 ## Installation
 
