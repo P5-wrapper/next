@@ -1,10 +1,10 @@
+allowBuilds:
+  esbuild: true
+  sharp: true
+
 autoInstallPeers: true
 
 dedupePeerDependents: true
-
-onlyBuiltDependencies:
-  - esbuild
-  - sharp
 
 overrides:
   "@isaacs/brace-expansion@<=5.0.0": ">=5.0.1"
