@@ -3,25 +3,38 @@
   "description": "A NextJS specific library for the @P5-Wrapper/react project.",
   "version": "3.0.1",
   "type": "module",
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=24.20.0"
+  },
   "homepage": "https://github.com/P5-wrapper/next",
   "license": "MIT",
-  "types": "dist/main.d.ts",
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/next.umd.cjs",
-  "module": "./dist/next.js",
+  "types": "./dist/main.d.ts",
+  "main": "./dist/main.cjs",
+  "module": "./dist/main.mjs",
   "exports": {
     ".": {
-      "import": "./dist/next.js",
       "types": "./dist/main.d.ts",
-      "require": "./dist/next.umd.cjs"
+      "import": "./dist/main.mjs",
+      "require": "./dist/main.cjs"
     }
   },
+  "files": [
+    "README.md",
+    "dist/*"
+  ],
   "scripts": {
+    "build": "rimraf dist && tsc --noEmit && vite build",
     "dev": "vite",
-    "build": "rimraf dist && tsc && vite build",
-    "preview": "vite preview"
+    "format": "pnpm prettier --write .",
+    "format:check": "pnpm prettier --check .",
+    "integrate": "pnpm format:check && pnpm lint && pnpm test && pnpm build",
+    "lint": "eslint --config config/eslint/eslint.config.ts",
+    "lint:fix": "pnpm lint --fix",
+    "prettier": "prettier --config config/prettier/prettier.json --ignore-path .gitignore",
+    "test": "vitest run --silent --config vite.config.ts",
+    "test:coverage": "vitest run --silent --coverage --config vite.config.ts",
+    "test:watch": "vitest watch --config vite.config.ts"
   },
   "keywords": [
     "react",
@@ -39,7 +52,7 @@
   "contributors": [],
   "repository": {
     "type": "git",
-    "url": "https://github.com/P5-wrapper/next.git"
+    "url": "git+https://github.com/P5-wrapper/next.git"
   },
   "bugs": {
     "url": "https://github.com/P5-wrapper/next/issues"
@@ -52,13 +65,38 @@
     "react-dom": ">= 19.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^8.0.1",
+    "@babel/eslint-plugin": "^8.0.1",
+    "@eslint/compat": "^2.1.0",
+    "@eslint/js": "^10.0.1",
+    "@microsoft/api-extractor": "^7.59.0",
+    "@p5-wrapper/react": "^5.0.4",
+    "@testing-library/jest-dom": "7.0.1",
+    "@testing-library/react": "^16.3.3",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/node": "^26.4.1",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.5",
+    "@typescript-eslint/eslint-plugin": "^8.69.0",
     "@vitejs/plugin-react": "^6.1.1",
+    "@vitest/coverage-v8": "^4.1.11",
+    "babel-plugin-react-compiler": "1.0.0",
+    "eslint": "^10.9.1",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-compiler": "19.1.0-rc.2",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "happy-dom": "^20.13.2",
+    "jiti": "^2.7.0",
+    "next": "^16.3.4",
+    "p5": "^2.3.2",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
     "rimraf": "^6.1.3",
-    "typescript": "^7.0.2",
+    "typescript": "6.0.3",
+    "typescript-eslint": "^8.69.0",
     "vite": "^8.2.2",
-    "vite-plugin-dts": "^5.1.0"
+    "vite-plugin-dts": "^5.1.0",
+    "vitest": "^4.1.11",
+    "vitest-canvas-mock": "^1.1.5"
   }
 }

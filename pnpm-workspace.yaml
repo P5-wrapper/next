@@ -1,17 +1,15 @@
-allowBuilds:
-  esbuild: true
-  sharp: true
-
 autoInstallPeers: true
-
 dedupePeerDependents: true
-
-overrides:
-  "@isaacs/brace-expansion@<=5.0.0": ">=5.0.1"
-  diff@>=6.0.0 <8.0.3: ">=8.0.3"
-  lodash@>=4.0.0 <=4.17.22: ">=4.17.23"
-  next@>=15.6.0-canary.0 <16.1.5: ">=16.1.5"
-  next@>=16.0.0-beta.0 <16.0.11: ">=16.0.11"
-  next@>=16.0.0-beta.0 <16.1.5: ">=16.1.5"
-
 strictPeerDependencies: true
+minimumReleaseAgeStrict: true
+
+peerDependencyRules:
+  allowedVersions:
+    "eslint-plugin-react>eslint": "10"
+
+minimumReleaseAgeExclude:
+  - happy-dom@20.13.2
+
+allowBuilds:
+  esbuild: false
+  sharp: false
