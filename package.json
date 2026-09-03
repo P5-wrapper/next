@@ -31,7 +31,7 @@
     "integrate": "pnpm format:check && pnpm lint && pnpm test && pnpm build",
     "lint": "eslint --config config/eslint/eslint.config.ts",
     "lint:fix": "pnpm lint --fix",
-    "prettier": "prettier --config config/prettier/prettier.json --ignore-path .gitignore",
+    "prettier": "prettier --config config/prettier/prettier.json --ignore-path .gitignore --ignore-path .prettierignore",
     "test": "vitest run --silent --config vite.config.ts",
     "test:coverage": "vitest run --silent --coverage --config vite.config.ts",
     "test:watch": "vitest watch --config vite.config.ts"
@@ -89,6 +89,7 @@
     "jiti": "^2.7.0",
     "next": "^16.3.4",
     "p5": "^2.3.2",
+    "prettier": "^3.9.6",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "rimraf": "^6.1.3",
