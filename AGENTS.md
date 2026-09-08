@@ -25,7 +25,7 @@
    action without explicit permission. If a CI fix is needed, propose the change
    and wait for approval.
 8. **No local publishing:** NEVER publish to npm locally. All releases go
-   through the CD workflow on push to `master`.
+   through the CD workflow on push to `main`.
 9. **Public API surface:** This package is consumed by downstream users. Do not
    rename, remove, or change the signature of anything exported from
    `src/main.tsx` without an explicit versioning discussion — exports are a
@@ -52,7 +52,7 @@ not `behavior`, `licence` not `license`, `centre` not `center`).
 
 ### Package Management
 
-- **Package manager:** pnpm (`pnpm@11.25.0` via the `packageManager` field —
+- **Package manager:** pnpm (`pnpm@12.3.4` via the `packageManager` field —
   Corepack manages the exact version, never install pnpm globally)
 - **Node.js engine:** `>=24.20.0` (declared in `package.json` `engines`)
 - **Lock file:** `pnpm-lock.yaml` is committed. NEVER delete or regenerate it
@@ -115,7 +115,7 @@ Every change must pass before being considered complete:
 - `pnpm format:check` — formatting
 - `pnpm lint` — linting
 - `pnpm test` — testing
-- `pnpm build` — type checking (`tsc --noEmit`) plus the library build
+- `pnpm build` — type checking (`tsc`) plus the library build
 
 `pnpm integrate` runs format check → lint → test → build in one command and is
 the closest local mirror of CI.
@@ -131,7 +131,7 @@ occasion requires fresh permission.
 
 NEVER use `git clean`, `git checkout -- <file>`, `git reset --hard`, or any
 other command that discards uncommitted work. NEVER force-push, rewrite
-published history, or modify protected branches (`master`). Investigate before
+published history, or modify protected branches (`main`). Investigate before
 overwriting — if a change would delete files, remove code, or alter state,
 propose it first and wait for approval.
 
@@ -289,9 +289,9 @@ src/main.tsx
 
 ### Build Pipeline
 
-- `pnpm build` = clean `dist` → `tsc --noEmit` (type check) → library build
-  (`dist`, ESM + CJS via Vite library mode, types bundled by `vite-plugin-dts`
-  with `bundleTypes`)
+- `pnpm build` = clean `dist` → `tsc` (type check) → library build (`dist`,
+  ESM + CJS via Vite library mode, types bundled by `vite-plugin-dts` with
+  `bundleTypes`)
 - `package.json` `exports` maps `types` → `main.d.ts`, `import` → ESM, `require`
   → CJS. The `files` field only ships `README.md` and `dist/*`
 - The library entry filenames are pinned in `vite.config.ts` (`main.mjs` /
@@ -323,21 +323,24 @@ src/main.tsx
 
 ## CI/CD
 
-- **CI** (`continuous-integration.yml`): Runs on all PRs to `master` and
+- **CI** (`continuous-integration.yml`): Runs on all PRs to `main` and
   `workflow_dispatch`. Jobs: `format`, `lint`, `test` (with coverage artifact
   and clover coverage delta comment), `build`, and `npm-dry-run` (validates the
   npm publish would succeed). CI concurrency cancels in-progress runs. Uses the
   `./.github/actions/setup` composite action with
   `pnpm install --frozen-lockfile`
-- **CD** (`continuous-deployment.yml`): Runs on push to `master` and
+- **CD** (`continuous-deployment.yml`): Runs on push to `main` and
   `workflow_dispatch`. Jobs: `npm` (builds, tests, and publishes the package
-  with provenance through the `production` GitHub environment). CD concurrency
-  does NOT cancel in-progress runs — never interrupt an in-flight publish
+  with provenance through the `production` GitHub environment, then creates the
+  matching `vx.y.z` GitHub release with auto-generated notes anchored at the
+  previous version tag). CD concurrency does NOT cancel in-progress runs — never
+  interrupt an in-flight publish
 - **CodeQL** (`.github/workflows/CODEQL.yml`): Security analysis on PRs and
-  pushes to `master`
-- **Dependabot:** Monthly for npm (production and development groups) and GitHub
-  Actions. Semver-major updates are ignored by config — they are handled
-  manually on dedicated branches
+  pushes to `main`
+- **Dependabot:** Monthly for npm (one grouped update across all dependencies)
+  and GitHub Actions, each limited to a single open pull request. Semver-major
+  updates are ignored by config — they are handled manually on dedicated
+  branches
 - **Permissions:** Workflows declare `permissions: {}` at the top and grant
   minimal per-job permissions. Keep it this way
 

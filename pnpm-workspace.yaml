@@ -7,12 +7,6 @@ peerDependencyRules:
   allowedVersions:
     "eslint-plugin-react>eslint": "10"
 
-minimumReleaseAgeExclude:
-  - happy-dom@20.13.2
-
 allowBuilds:
   esbuild: false
   sharp: false
-
-overrides:
-  esbuild@>=0.27.3 <0.28.1: ^0.28.1

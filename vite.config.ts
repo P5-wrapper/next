@@ -53,6 +53,7 @@ export default defineConfig((): UserConfig => {
   if (isVitest) {
     config.test = {
       globals: true,
+      silent: true,
       environment: "happy-dom",
       coverage: {
         include: ["src/**/*.{ts,tsx}"],
