@@ -85,7 +85,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-compiler": "19.1.0-rc.2",
     "eslint-plugin-react-hooks": "^7.1.1",
-    "happy-dom": "^20.14.0",
+    "happy-dom": "^21.0.4",
     "jiti": "^2.7.0",
     "next": "^16.3.4",
     "p5": "2.3.4",
