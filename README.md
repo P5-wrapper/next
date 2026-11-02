@@ -36,7 +36,7 @@ import { NextReactP5Wrapper } from "@p5-wrapper/next";
 import { type Sketch } from "@p5-wrapper/react";
 import React from "react";
 
-const sketch: Sketch = p5 => {
+const sketch: Sketch = (p5) => {
   p5.setup = () => p5.createCanvas(600, 400, p5.WEBGL);
 
   p5.draw = () => {
@@ -99,13 +99,11 @@ public API in `src/main.tsx` backwards compatible. Commits follow the
 `fix:`, `chore:`, etc.) — emoji prefixes are only used by automated pull
 requests.
 
-The `typescript` dependency is pinned to `6.0.3` on purpose:
-[typescript-eslint](https://typescript-eslint.io) does not support TypeScript 7
-yet — the Go-based v7 is not feature compatible with the v6 API it builds on,
-and upstream support cannot land before TypeScript 7.1.x. It is tracked in
-[typescript-eslint#10940](https://github.com/typescript-eslint/typescript-eslint/issues/10940).
-Please do not widen the pin in pull requests — we wait for full feature parity
-before migrating to v7, no half measures.
+The `typescript` dependency is pinned to the latest `6.x.x` release on purpose:
+TypeScript 7 (Go-based) is not yet feature compatible with the JavaScript-based
+v6 API that the build toolchain builds on. Please do not bump past `6.x.x` or
+widen the pin in pull requests — we wait for full feature parity before
+migrating to v7, no half measures.
 
 #### AI-assisted contributions
 
