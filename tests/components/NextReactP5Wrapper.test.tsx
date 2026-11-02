@@ -12,7 +12,7 @@ const sketch: Sketch = (p5) => {
 describe("NextReactP5Wrapper", () => {
   it("Renders the underlying P5Canvas once the dynamic import resolves", async () => {
     const { container, findByTestId } = render(
-      <NextReactP5Wrapper sketch={sketch} />,
+      <NextReactP5Wrapper sketch={sketch} />
     );
 
     const canvasContainer = await findByTestId("canvas-container");
