@@ -1,9 +1,9 @@
-import { NextReactP5Wrapper } from "@/main";
 import { type Sketch } from "@p5-wrapper/react";
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
+import { NextReactP5Wrapper } from "@/main";
 
-const sketch: Sketch = p5 => {
+const sketch: Sketch = (p5) => {
   p5.setup = () => {
     p5.createCanvas(600, 400);
   };

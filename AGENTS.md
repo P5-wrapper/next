@@ -4,9 +4,9 @@
 
 1. **Plan first:** Create a detailed plan and get explicit user approval before
    making changes.
-2. **Quality gates:** Every change must pass `pnpm format:check`, `pnpm lint`,
-   `pnpm test`, and `pnpm build` (or `pnpm integrate` for the full pipeline)
-   before being considered complete.
+2. **Quality gates:** Every change must pass `pnpm lint`, `pnpm test`, and
+   `pnpm build` (or `pnpm integrate` for the full pipeline) before being
+   considered complete.
 3. **Documentation:** Update `README.md`, `AGENTS.md`, configuration files, and
    any other documentation affected by your changes. Clean as you go — take
    ownership of every file you touch.
@@ -52,7 +52,7 @@ not `behavior`, `licence` not `license`, `centre` not `center`).
 
 ### Package Management
 
-- **Package manager:** pnpm (`pnpm@12.3.4` via the `packageManager` field —
+- **Package manager:** pnpm (`pnpm@12.16.1` via the `packageManager` field —
   Corepack manages the exact version, never install pnpm globally)
 - **Node.js engine:** `>=24.20.0` (declared in `package.json` `engines`)
 - **Lock file:** `pnpm-lock.yaml` is committed. NEVER delete or regenerate it
@@ -66,34 +66,34 @@ not `behavior`, `licence` not `license`, `centre` not `center`).
 - **Babel plugin override:** `pnpm-workspace.yaml` redirects
   `@babel/plugin-proposal-private-methods` (deprecated upstream) to
   `npm:@babel/plugin-transform-private-methods@^7.29.7`. The 7.x line is the
-  correct target while `eslint-plugin-react-compiler@19.1.0-rc.2` resolves
-  `@babel/core` 7.29.x — the v8 plugin requires `@babel/core ^8.0.0` and fails
-  the strict peer gate. Revisit when the react-compiler plugin migrates to Babel
-  8
-- **p5 dev resolution pinned:** the devDependency `p5` is pinned to exactly
-  `2.3.2` because upstream `2.3.3` was published without its `types/` files
-  (despite the manifest declaring them), breaking type checking. The
-  `p5 >= 2.0.0` peer dependency contract is unchanged. Revisit when p5.js
-  republishes a complete 2.3.3+
+  correct target while `babel-plugin-react-compiler` resolves `@babel/core`
+  7.29.x — the v8 plugin requires `@babel/core ^8.0.0` and fails the strict peer
+  gate. Revisit when the react-compiler plugin migrates to Babel 8
+- **p5 dev resolution:** the devDependency `p5` tracks the latest complete 2.x
+  release (currently pinned to exactly `2.3.4` because upstream `2.3.3` was
+  published without its `types/` files despite the manifest declaring them,
+  breaking type checking — `2.3.4` republished them). The `p5 >= 2.0.0` peer
+  dependency contract is unchanged. Revisit the exact pin if a later 2.x release
+  ships incomplete types again
 - **Peer dependencies are a contract:** `@p5-wrapper/react`, `p5`, `next`,
   `react`, and `react-dom` are peer dependencies. The library code must never
   import anything beyond these at runtime — there are no runtime dependencies
 
 ### Formatting and Linting
 
-- **Prettier** is the formatter (this project does not use Biome — do not
-  introduce it). Config lives at `config/prettier/prettier.json`, key rules:
-  `printWidth: 80`, `arrowParens: "avoid"`, `trailingComma: "none"`,
-  `proseWrap: "always"` (all Markdown prose is hard-wrapped at 80 columns),
-  imports sorted by `@trivago/prettier-plugin-sort-imports`
-- **ESLint** is the linter. Config lives at `config/eslint/eslint.config.ts` and
-  extends `eslint` recommended, `typescript-eslint` strict and stylistic, and
-  `eslint-plugin-react-compiler` recommended with project-aware TypeScript
-  parsing. Type-aware linting runs via `jiti` — keep the config a `.ts` file
-- **React Compiler:** The React Compiler ESLint rules are enabled. Components
-  must follow the Rules of React strictly — no manual memoisation where the
-  compiler can handle it, no mutating props or render-time side effects. Do not
-  disable these rules
+- **Biome** is the formatter and linter. Config lives at the repository-root
+  `biome.json`, key rules: 2-space indentation, double quotes, semicolons
+  always, `proseWrap: "always"` (all Markdown prose is hard-wrapped at 80
+  columns), imports organised by Biome's `assist` `organizeImports` action,
+  linter `recommended` preset plus `useBlockStatements: "error"`. The `$schema`
+  key points at `./node_modules/@biomejs/biome/configuration_schema.json` so it
+  always tracks the installed Biome version. `pnpm format` runs
+  `biome check --write .`; `pnpm lint` runs `biome check .` (formatting check
+  plus lint)
+- **React Compiler:** The React Compiler Babel plugin
+  (`babel-plugin-react-compiler`) is active in the build. Components must follow
+  the Rules of React strictly — no manual memoisation where the compiler can
+  handle it, no mutating props or render-time side effects
 - **No comments:** Do not add comments to source files. The code should be
   self-documenting. The only permitted exception is `@ts-expect-error` /
   `@ts-ignore` suppressions with a `@see` reference
@@ -107,16 +107,11 @@ not `behavior`, `licence` not `license`, `centre` not `center`).
 - **Import style:** Use `import { type Foo }` inline type imports, matching the
   sibling `@p5-wrapper/react` codebase
 - **Type assertions:** Avoid `as` casts in library code
-- **Version pinned to 6.0.3:** `typescript` is an exact pin
-  (`"typescript": "6.0.3"`, no caret), deliberately held back from v7.
-  typescript-eslint does not currently support TypeScript 7 — its
-  [supported range](https://typescript-eslint.io/packages/parser) is
-  `>=4.8.4 <6.1.0`, and the Go-based TypeScript 7 is not yet feature compatible
-  with the JavaScript-based v6 API that typescript-eslint builds on. Upstream
-  support is tracked in
-  [typescript-eslint#10940](https://github.com/typescript-eslint/typescript-eslint/issues/10940)
-  and cannot land before TypeScript 7.1.x at the earliest. Do not bump past
-  `6.0.x` or widen the pin without confirming upstream support. Do NOT run
+- **Version pinned to the latest 6.x.x:** `typescript` is an exact pin (no
+  caret), deliberately held back from v7. TypeScript 7 is Go-based and not yet
+  feature compatible with the JavaScript-based v6 API that the build toolchain
+  (`vite`, `vite-plugin-dts`, `@microsoft/api-extractor`) builds on. Do not bump
+  past `6.0.x` or widen the pin without confirming toolchain support. Do NOT run
   TypeScript 7 side by side with v6 as an interim measure — we wait for full
   feature parity before migrating, no half measures
 
@@ -124,13 +119,12 @@ not `behavior`, `licence` not `license`, `centre` not `center`).
 
 Every change must pass before being considered complete:
 
-- `pnpm format:check` — formatting
-- `pnpm lint` — linting
+- `pnpm lint` — formatting check + linting (Biome)
 - `pnpm test` — testing
 - `pnpm build` — type checking (`tsc`) plus the library build
 
-`pnpm integrate` runs format check → lint → test → build in one command and is
-the closest local mirror of CI.
+`pnpm integrate` runs lint → test → build in one command and is the closest
+local mirror of CI.
 
 ### Git Safety
 
@@ -237,7 +231,8 @@ legally certify a contribution — the human submitter reviews the AI-generated
 code, takes full responsibility for it, and adds any certification trailers
 themselves. Following the rules the Linux kernel team enforce for AI coding
 assistants, an agent's role in a commit ends at the message body — no
-`Signed-off-by`, no `Co-authored-by`, no other trailers or sign-offs. See [AI
+`Signed-off-by`, no `Co-authored-by`, no other trailers or sign-offs. See
+[AI
 Coding Assistants — The Linux Kernel documentation]
 (https://docs.kernel.org/process/coding-assistants.html), integrated into this
 ruleset on 2026-09-03.
@@ -301,8 +296,8 @@ src/main.tsx
 
 ### Build Pipeline
 
-- `pnpm build` = clean `dist` → `tsc` (type check) → library build (`dist`,
-  ESM + CJS via Vite library mode, types bundled by `vite-plugin-dts` with
+- `pnpm build` = clean `dist` → `tsc` (type check) → library build (`dist`, ESM +
+  CJS via Vite library mode, types bundled by `vite-plugin-dts` with
   `bundleTypes`)
 - `package.json` `exports` maps `types` → `main.d.ts`, `import` → ESM, `require`
   → CJS. The `files` field only ships `README.md` and `dist/*`
@@ -323,22 +318,20 @@ src/main.tsx
 | :------------------- | :---------------------------------------- |
 | `pnpm install`       | Install dependencies (updates lockfile).  |
 | `pnpm dev`           | Run the Vite dev tooling.                 |
-| `pnpm format`        | Format all files with Prettier.           |
-| `pnpm format:check`  | Check formatting without writing.         |
-| `pnpm lint`          | Run ESLint (type-aware).                  |
-| `pnpm lint:fix`      | Run ESLint with autofix.                  |
+| `pnpm format`        | Format and lint-fix all files with Biome. |
+| `pnpm lint`          | Check formatting and lint with Biome.     |
 | `pnpm test`          | Run the Vitest suite.                     |
 | `pnpm test:coverage` | Run tests with coverage (what CI runs).   |
 | `pnpm test:watch`    | Watch mode.                               |
 | `pnpm build`         | Clean, type check, and build the library. |
-| `pnpm integrate`     | format:check → lint → test → build.       |
+| `pnpm integrate`     | lint → test → build.                      |
 
 ## CI/CD
 
 - **CI** (`continuous-integration.yml`): Runs on all PRs to `main` and
-  `workflow_dispatch`. Jobs: `format`, `lint`, `test` (with coverage artifact
-  and clover coverage delta comment), `build`, and `npm-dry-run` (validates the
-  npm publish would succeed). CI concurrency cancels in-progress runs. Uses the
+  `workflow_dispatch`. Jobs: `lint`, `test` (with coverage artifact and clover
+  coverage delta comment), `build`, and `npm-dry-run` (validates the npm publish
+  would succeed). CI concurrency cancels in-progress runs. Uses the
   `./.github/actions/setup` composite action with
   `pnpm install --frozen-lockfile`
 - **CD** (`continuous-deployment.yml`): Runs on push to `main` and

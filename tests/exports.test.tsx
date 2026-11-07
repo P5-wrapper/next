@@ -1,5 +1,5 @@
-import { NextReactP5Wrapper } from "@/main";
 import { describe, expect, it } from "vitest";
+import { NextReactP5Wrapper } from "@/main";
 
 describe("Exports", () => {
   describe("NextReactP5Wrapper", () => {

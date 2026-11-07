@@ -1,5 +1,5 @@
-import react from "@vitejs/plugin-react";
 import { resolve } from "node:path";
+import react from "@vitejs/plugin-react";
 import { UserConfig } from "vite";
 import dts from "vite-plugin-dts";
 import { defineConfig } from "vitest/config";
@@ -26,7 +26,7 @@ export default defineConfig((): UserConfig => {
       lib: {
         entry: resolve(root, "src", "main.tsx"),
         name: "NextReactP5Wrapper",
-        fileName: format => (format === "es" ? "main.mjs" : "main.cjs"),
+        fileName: (format) => (format === "es" ? "main.mjs" : "main.cjs"),
         formats: ["es", "cjs"]
       },
       rollupOptions: {
